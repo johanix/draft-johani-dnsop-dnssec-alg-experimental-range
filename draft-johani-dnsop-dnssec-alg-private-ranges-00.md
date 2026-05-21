@@ -35,7 +35,6 @@ normative:
 informative:
   RFC4035:
   RFC6840:
-  RFC8624:
   FIPS204:
     title: "Module-Lattice-Based Digital Signature Standard"
     target: "https://csrc.nist.gov/pubs/fips/204/final"
