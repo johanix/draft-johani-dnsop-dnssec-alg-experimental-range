@@ -77,7 +77,7 @@ and RFC 9157.
 # Introduction
 
 The "DNS Security Algorithm Numbers" registry {{RFC4034}} assigns the
-values used in the Algorithm field of the DNSKEY, RRSIG, DS, and related
+values used in the Algorithm field of the DNSKEY, RRSIG, and related
 resource records. Its allocation policy was established by {{RFC6014}}
 and subsequently revised by {{RFC9157}}; values in the range 123-251
 are currently marked "Reserved".
@@ -150,21 +150,6 @@ RRSIG/DNSKEY out-of-band agreement:
   extract the embedded name/OID, and confirm it matches the algorithm
   the signer used; the signer and verifier must agree on the private
   algorithm out of band of the wire format.
-
-No parent-side signal of large keys:
-: The DS RRset in the parent carries the algorithm number of the child's
-  key. A practical post-quantum deployment may pair a large PQC key
-  signing key (KSK) with a small traditional zone signing key (ZSK). The
-  resulting DNSKEY RRset will typically exceed the widely deployed
-  1232-octet EDNS(0) UDP payload size, so a UDP query for it returns a
-  truncated (TC=1) response and the resolver must retry over TCP, which
-  is comparatively expensive. If each algorithm has a distinct code
-  point, a resolver (or its operator) can infer from the DS algorithm
-  number alone that the child uses a large PQC algorithm and query the
-  DNSKEY RRset over TCP directly, avoiding the truncated-UDP round trip.
-  With 253/254 every private algorithm collapses to one code point, so
-  the DS algorithm number conveys nothing about which algorithm, and
-  hence what key size, is in use; the signal is lost.
 
 Wire overhead:
 : Carrying a domain name or OID inside every DNSKEY is modest in
@@ -265,12 +250,10 @@ zone bogus.
 
 Within an experimental or private deployment, code points from these
 ranges will appear in the Algorithm field of DS records published at the
-parent, exactly as standardized algorithm numbers do. This is
-intentional and useful: as described in {{insufficient}}, a distinct DS
-algorithm number lets a resolver anticipate a large child DNSKEY RRset
-and query it over TCP directly. A validating resolver outside the
-deployment that does not recognize the algorithm will treat the
-delegation as insecure, as it would for any unknown algorithm.
+parent, exactly as standardized algorithm numbers do. A validating
+resolver outside the deployment that does not recognize the algorithm
+will treat the delegation as insecure, as it would for any unknown
+algorithm.
 
 # IANA Considerations {#iana}
 
