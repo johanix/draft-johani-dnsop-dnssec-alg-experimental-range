@@ -1,6 +1,6 @@
 ---
-title: "Private Use and Experimental Code Points in the DNSSEC Algorithm Numbers Registry"
-abbrev: "DNSSEC Private/Experimental Algorithms"
+title: "Experimental and Private-Use Ranges in the DNSSEC Algorithm Numbers Registry"
+abbrev: "DNSSEC Algorithm Ranges"
 category: std
 docname: draft-johani-dnsop-dnssec-alg-private-ranges-00
 submissiontype: IETF
@@ -35,6 +35,7 @@ normative:
 informative:
   RFC4035:
   RFC6840:
+  I-D.johani-dnsop-dnssec-alg-split:
   FIPS204:
     title: "Module-Lattice-Based Digital Signature Standard"
     target: "https://csrc.nist.gov/pubs/fips/204/final"
@@ -106,10 +107,16 @@ are two converging reasons why a cleaner mechanism is required now:
    interoperate with several such algorithms concurrently, well before
    any of them warrants a permanent, standardized code point.
 
+The experimental range defined here is anticipated to be useful in
+particular for the kind of large-KSK algorithm experimentation
+described in {{?I-D.johani-dnsop-dnssec-alg-split}}, where
+post-quantum candidate algorithms with different size and strength
+trade-offs are evaluated in real deployments.
+
 This document carves two small ranges out of the Reserved block of the
-DNSSEC Algorithm Numbers registry: a Private Use range that requires no
-IANA action, and an experimental range registered on a First Come First
-Served basis. Algorithms using code points from these ranges are
+DNSSEC Algorithm Numbers registry: an experimental range registered on
+a First Come First Served basis, and a Private Use range that requires
+no IANA action. Algorithms using code points from these ranges are
 dispatched by algorithm number alone, exactly like standardized
 algorithms, and impose no special parsing on the DNSKEY RDATA.
 
@@ -176,7 +183,7 @@ alone, and the DNSKEY "Public Key" field carries only key material.
 
 ## Private Use Range
 
-The range 240-251 is designated for Private Use, as defined in
+The range 244-251 is designated for Private Use, as defined in
 Section 4.1 of {{RFC8126}}. No IANA registration is made for these
 values, and no IANA action is required to use one.
 
@@ -194,7 +201,7 @@ coordination overhead.
 
 ## Experimental Range
 
-The range 224-239 is designated for experimental algorithms and is
+The range 228-243 is designated for experimental algorithms and is
 registered on a First Come First Served basis (Section 4.7 of
 {{RFC8126}}).
 
@@ -261,18 +268,18 @@ IANA is requested to update the "DNS Security Algorithm Numbers"
 registry within the "Domain Name System Security (DNSSEC) Algorithm
 Numbers" registry group.
 
-The values 224-251 are currently part of the "Reserved" block (123-251,
+The values 228-251 are currently part of the "Reserved" block (123-251,
 {{RFC4034}} {{RFC6014}}). IANA is requested to remove these values from
 that Reserved block and to record them as follows. After this change,
-the Reserved block is 123-223.
+the Reserved block is 123-227.
 
 | Number  | Description                | Mnemonic | Reference       |
 |---------|----------------------------|----------|-----------------|
-| 224-239 | Experimental algorithms    |          | (this document) |
-| 240-251 | Private Use                |          | (this document) |
+| 228-243 | Experimental algorithms    |          | (this document) |
+| 244-251 | Private Use                |          | (this document) |
 {: title="Updated DNSSEC Algorithm Numbers entries"}
 
-For the range 224-239 ("Experimental algorithms"), the registration
+For the range 228-243 ("Experimental algorithms"), the registration
 procedure is First Come First Served {{RFC8126}}. Each registration
 request must include:
 
@@ -286,7 +293,7 @@ Registrations in this range are understood to be experimental: entries
 MAY be deprecated, removed, or reassigned, and assignment of a code
 point does not imply any standardization status.
 
-For the range 240-251 ("Private Use"), the policy is Private Use
+For the range 244-251 ("Private Use"), the policy is Private Use
 {{RFC8126}}; IANA makes no assignments and takes no further action for
 these values.
 
@@ -329,4 +336,8 @@ DNSKEY RRset does not on its own make a zone bogus.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The author thanks Peter Thomassen (deSEC), Ondřej Surý (Internet
+Systems Consortium), Benno Overeinder (NLnet Labs), and Erik
+Bergström (Swedish Internet Foundation) for valuable insights and
+discussions on the need for distinct experimental algorithm code
+points.
