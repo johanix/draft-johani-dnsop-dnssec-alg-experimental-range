@@ -2,7 +2,7 @@
 title: "Experimental and Private-Use Ranges in the DNSSEC Algorithm Numbers Registry"
 abbrev: "DNSSEC Algorithm Ranges"
 category: std
-docname: draft-johani-dnsop-dnssec-alg-private-ranges-00
+docname: draft-johani-dnsop-dnssec-alg-experimental-ranges-00
 submissiontype: IETF
 ipr: trust200902
 area: "Internet"

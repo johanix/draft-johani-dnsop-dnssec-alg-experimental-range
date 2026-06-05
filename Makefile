@@ -1,4 +1,4 @@
-DRAFT = draft-johani-dnsop-dnssec-alg-private-ranges
+DRAFT = draft-johani-dnsop-dnssec-alg-experimental-ranges
 VERSION = 00
 
 all: $(DRAFT)-$(VERSION).txt $(DRAFT)-$(VERSION).html

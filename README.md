@@ -1,7 +1,7 @@
-# draft-johani-dnsop-dnssec-alg-private-ranges
+# draft-johani-dnsop-dnssec-alg-experimental-ranges
 
 IETF Internet-Draft:
-**Private Use and Experimental Code Points in the DNSSEC Algorithm
+**Experimental and Private-Use Ranges in the DNSSEC Algorithm
 Numbers Registry**
 
 ## Summary
@@ -17,9 +17,11 @@ apart on the wire by algorithm number alone.
 This draft carves two small ranges out of the Reserved block of the
 registry:
 
-* a **Private Use** range (no IANA action, single-deployment use), and
-* an **experimental** range (registered First Come First Served, for
-  collision-free shared interoperability testing).
+* an **Experimental** range (228-243, registered First Come First
+  Served, for collision-free shared interoperability testing across
+  independent implementations), and
+* a **Private Use** range (244-251, no IANA action, single-deployment
+  use).
 
 Code points from these ranges behave like ordinary algorithm numbers:
 dispatch is by code point alone and the DNSKEY RDATA is not overloaded.
@@ -36,7 +38,7 @@ This document updates RFC 6014 and RFC 9157.
 
 ## Current version
 
-[draft-johani-dnsop-dnssec-alg-private-ranges-00.md](draft-johani-dnsop-dnssec-alg-private-ranges-00.md)
+[draft-johani-dnsop-dnssec-alg-experimental-ranges-00.md](draft-johani-dnsop-dnssec-alg-experimental-ranges-00.md)
 — status: Internet-Draft, Standards Track, -00.
 
 ## Building the draft
