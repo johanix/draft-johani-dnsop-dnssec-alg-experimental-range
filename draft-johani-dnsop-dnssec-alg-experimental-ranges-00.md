@@ -174,12 +174,31 @@ while still gaining no interoperability outside its own deployment,
 since general-purpose validators that implement 253/254 are rare. A
 small range of ordinary code points avoids all of this.
 
-# Allocation of Private Use and Experimental Code Points
+# Allocation of Experimental and Private-Use Code Points
 
 This document designates two ranges within the DNSSEC Algorithm Numbers
 registry. Code points in either range are used in the Algorithm field
 exactly as standardized algorithm numbers are: dispatch is by code point
 alone, and the DNSKEY "Public Key" field carries only key material.
+
+## Experimental Range
+
+The range 228-243 is designated for experimental algorithms and is
+registered on a First Come First Served basis (Section 4.7 of
+{{RFC8126}}).
+
+Code points in this range are recorded by IANA, so that independent
+experimenters can choose distinct code points and run interoperability
+tests without colliding. Registration is deliberately low-friction: a
+registrant supplies a short description and a point of contact (see
+{{iana}}).
+
+Code points in this range are for experimentation and interoperability
+testing only. An algorithm that proves valuable for general use is
+expected to be assigned a code point under the registry's normal policy
+{{RFC9157}}; the experimental code point is then expected to be
+deprecated. Experimental code points MUST NOT be relied upon for
+production deployments, and entries MAY be removed or reassigned.
 
 ## Private Use Range
 
@@ -190,33 +209,14 @@ values, and no IANA action is required to use one.
 Private Use code points are intended for use within a single
 administrative domain (one operator, one test lab, one deployment). The
 mapping from a Private Use code point to an actual algorithm is a local
-matter. Because no central registry exists, two deployments MAY use the
-same Private Use code point for different algorithms; implementations
-MUST NOT assume any particular meaning for a Private Use code point
-across administrative boundaries.
+matter. Unlike the Experimental range, no central registry exists, so
+two deployments MAY use the same Private Use code point for different
+algorithms; implementations MUST NOT assume any particular meaning for
+a Private Use code point across administrative boundaries.
 
 This range is appropriate for an operator that wishes to run several
 algorithms concurrently and distinguish them by code point, without any
 coordination overhead.
-
-## Experimental Range
-
-The range 228-243 is designated for experimental algorithms and is
-registered on a First Come First Served basis (Section 4.7 of
-{{RFC8126}}).
-
-Unlike the Private Use range, code points in this range are recorded by
-IANA, so that independent experimenters can choose distinct code points
-and run interoperability tests without colliding. Registration is
-deliberately low-friction: a registrant supplies a short description
-and a point of contact (see {{iana}}).
-
-Code points in this range are for experimentation and interoperability
-testing only. An algorithm that proves valuable for general use is
-expected to be assigned a code point under the registry's normal policy
-{{RFC9157}}; the experimental code point is then expected to be
-deprecated. Experimental code points MUST NOT be relied upon for
-production deployments, and entries MAY be removed or reassigned.
 
 ## Relationship to RFC 8126 "Experimental Use" {#exp-clarification}
 
