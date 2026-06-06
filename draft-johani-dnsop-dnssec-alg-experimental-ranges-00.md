@@ -36,6 +36,7 @@ informative:
   RFC4035:
   RFC6840:
   I-D.johani-dnsop-dnssec-alg-split:
+  I-D.ietf-dnsop-delegation-mgmt-via-ddns:
   FIPS204:
     title: "Module-Lattice-Based Digital Signature Standard"
     target: "https://csrc.nist.gov/pubs/fips/204/final"
@@ -108,10 +109,27 @@ are two converging reasons why a cleaner mechanism is required now:
    any of them warrants a permanent, standardized code point.
 
 The experimental range defined here is anticipated to be useful in
-particular for the kind of large-KSK algorithm experimentation
-described in {{?I-D.johani-dnsop-dnssec-alg-split}}, where
-post-quantum candidate algorithms with different size and strength
-trade-offs are evaluated in real deployments.
+particular for two emerging deployment scenarios:
+
+* The kind of large-KSK algorithm experimentation described in
+  {{?I-D.johani-dnsop-dnssec-alg-split}}, where post-quantum
+  candidate algorithms with different size and strength
+  trade-offs are evaluated as DNSKEY/RRSIG/DS algorithms in
+  real zones.
+
+* The SIG(0) key used to sign cross-zone-cut DNS UPDATE messages
+  between a child and the parent's UPDATE Receiver in the
+  delegation-management mechanism of
+  {{?I-D.ietf-dnsop-delegation-mgmt-via-ddns}}. That path is
+  infrequent and uses TCP, so it imposes no significant
+  wire-size constraint on the SIG(0) signature and is a natural
+  low-risk environment for trying experimental algorithms.
+
+Both scenarios benefit from distinct code points: validators and
+UPDATE Receivers can dispatch on the algorithm number alone,
+multiple candidates can coexist for interoperability testing, and
+experiments can be conducted across organizations without
+collisions or out-of-band coordination.
 
 This document carves two small ranges out of the Reserved block of the
 DNSSEC Algorithm Numbers registry: an experimental range registered on
