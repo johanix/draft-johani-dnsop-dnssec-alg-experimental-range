@@ -35,8 +35,6 @@ normative:
 informative:
   RFC4035:
   RFC6840:
-  I-D.johani-dnsop-dnssec-alg-split:
-  I-D.ietf-dnsop-delegation-mgmt-via-ddns:
   FIPS204:
     title: "Module-Lattice-Based Digital Signature Standard"
     target: "https://csrc.nist.gov/pubs/fips/204/final"
@@ -176,15 +174,11 @@ RRSIG/DNSKEY out-of-band agreement:
   the signer used; the signer and verifier must agree on the private
   algorithm out of band of the wire format.
 
-Wire overhead:
-: Carrying a domain name or OID inside every DNSKEY is modest in
-  absolute terms, but it is pure overhead, and it must be accounted for
-  by every producer and consumer of the record.
-
-Tooling impact:
-: Key file formats, test harnesses, and operational tooling must all
-  treat 253/254 specially, because "algorithm 254" alone does not
-  identify a keypair.
+These three are load-bearing; the overloading also carries lesser
+costs (the prepended name or OID is pure wire overhead in every
+DNSKEY, and key file formats, test harnesses, and tooling must all
+special-case 253/254 because the algorithm number alone does not
+identify a keypair).
 
 The net effect is that an implementation supporting several private
 algorithms via 253/254 pays a permanent special-casing tax internally,
@@ -199,7 +193,7 @@ registry. Code points in either range are used in the Algorithm field
 exactly as standardized algorithm numbers are: dispatch is by code point
 alone, and the DNSKEY "Public Key" field carries only key material.
 
-## Experimental Range
+## Experimental Range {#exp-range}
 
 The range 228-243 is designated for experimental algorithms and is
 registered on a First Come First Served basis (Section 4.7 of
@@ -212,11 +206,22 @@ registrant supplies a short description and a point of contact (see
 {{iana}}).
 
 Code points in this range are for experimentation and interoperability
-testing only. An algorithm that proves valuable for general use is
-expected to be assigned a code point under the registry's normal policy
-{{RFC9157}}; the experimental code point is then expected to be
-deprecated. Experimental code points MUST NOT be relied upon for
-production deployments, and entries MAY be removed or reassigned.
+testing only, and MUST NOT be relied upon for production deployments.
+
+The lifecycle of an algorithm — how a candidate is evaluated and
+eventually standardized — is outside the scope of this document; this
+document governs only the experimental range itself. The relationship
+between the two is simple and exclusive: an algorithm is either
+experimental or standardized, never both. When an algorithm is
+assigned a code point under the registry's normal policy {{RFC9157}},
+any experimental code point it was using is removed from the
+experimental range at the same time. There is no overlap period and no
+deprecation window; a standardized algorithm always receives a new,
+ordinary code point rather than retaining its experimental one. A code
+point freed in this way — whether because the algorithm graduated or
+because the experiment was abandoned — returns to the pool of values
+available for First Come First Served assignment within the
+experimental range.
 
 ## Private Use Range
 
@@ -307,9 +312,13 @@ request must include:
 * a brief description and/or a stable reference; and
 * a point of contact.
 
-Registrations in this range are understood to be experimental: entries
-MAY be deprecated, removed, or reassigned, and assignment of a code
-point does not imply any standardization status.
+Registrations in this range are understood to be experimental:
+assignment of a code point does not imply any standardization status,
+and an entry is removed from the experimental range when its algorithm
+is standardized under the registry's normal policy (see
+{{exp-range}}). A code point freed by graduation or by an abandoned
+experiment returns to the pool available for First Come First Served
+assignment.
 
 For the range 244-251 ("Private Use"), the policy is Private Use
 {{RFC8126}}; IANA makes no assignments and takes no further action for
