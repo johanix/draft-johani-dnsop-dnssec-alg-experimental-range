@@ -218,10 +218,12 @@ any experimental code point it was using is removed from the
 experimental range at the same time. There is no overlap period and no
 deprecation window; a standardized algorithm always receives a new,
 ordinary code point rather than retaining its experimental one. A code
-point freed in this way — whether because the algorithm graduated or
-because the experiment was abandoned — returns to the pool of values
-available for First Come First Served assignment within the
-experimental range.
+point freed in this way — whether because the algorithm graduated, the
+registrant released it, or the experiment was abandoned and reclaimed —
+returns to the pool of values available for First Come First Served
+assignment within the experimental range. Because the range is a finite
+shared resource, this document defines a lightweight process for
+releasing and reclaiming code points; see {{iana}}.
 
 ## Private Use Range
 
@@ -316,9 +318,34 @@ Registrations in this range are understood to be experimental:
 assignment of a code point does not imply any standardization status,
 and an entry is removed from the experimental range when its algorithm
 is standardized under the registry's normal policy (see
-{{exp-range}}). A code point freed by graduation or by an abandoned
-experiment returns to the pool available for First Come First Served
-assignment.
+{{exp-range}}).
+
+Because the experimental range is a finite, shared resource, code
+points are intended to be returned to availability rather than held
+indefinitely. A code point in this range is released — its entry
+removed and the value returned to the pool available for First Come
+First Served assignment — in any of the following cases:
+
+* the algorithm is standardized and receives an ordinary code point
+  under the registry's normal policy (the entry is removed at the same
+  time, as described in {{exp-range}});
+
+* the registrant requests release, via the registered point of
+  contact; or
+
+* the entry is reclaimed as abandoned (see below).
+
+To support release and the curation of abandoned entries, IANA is
+requested to appoint a Designated Expert {{RFC8126}} for this range.
+The Designated Expert is not consulted for ordinary First Come First
+Served assignments, which remain low-friction; the Expert's role is
+limited to confirming releases and to reclaiming entries that have
+been standardized or whose point of contact has become unresponsive
+and whose entry shows no sign of continued use. Before reclaiming an
+entry as abandoned, the Designated Expert SHOULD attempt to reach the
+registered point of contact. A released code point carries no record
+of its prior experimental use and MAY subsequently be assigned to an
+unrelated experiment.
 
 For the range 244-251 ("Private Use"), the policy is Private Use
 {{RFC8126}}; IANA makes no assignments and takes no further action for
