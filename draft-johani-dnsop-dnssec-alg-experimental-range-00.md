@@ -208,8 +208,8 @@ registrant supplies a short description and a point of contact (see
 Code points in this range are for experimentation and interoperability
 testing only, and MUST NOT be relied upon for production deployments.
 
-The lifecycle of an algorithm — how a candidate is evaluated and
-eventually standardized — is outside the scope of this document; this
+The lifecycle of an algorithm -- how a candidate is evaluated and
+eventually standardized -- is outside the scope of this document; this
 document governs only the experimental range itself. The relationship
 between the two is simple and exclusive: an algorithm is either
 experimental or standardized, never both. When an algorithm is
@@ -218,8 +218,8 @@ any experimental code point it was using is removed from the
 experimental range at the same time. There is no overlap period and no
 deprecation window; a standardized algorithm always receives a new,
 ordinary code point rather than retaining its experimental one. A code
-point freed in this way — whether because the algorithm graduated, the
-registrant released it, or the experiment was abandoned and reclaimed —
+point freed in this way -- whether because the algorithm graduated, the
+registrant released it, or the experiment was abandoned and reclaimed --
 returns to the pool of values available for First Come First Served
 assignment within the experimental range. Because the range is a finite
 shared resource, this document defines a lightweight process for
@@ -322,9 +322,9 @@ is standardized under the registry's normal policy (see
 
 Because the experimental range is a finite, shared resource, code
 points are intended to be returned to availability rather than held
-indefinitely. A code point in this range is released — its entry
+indefinitely. A code point in this range is released -- its entry
 removed and the value returned to the pool available for First Come
-First Served assignment — in any of the following cases:
+First Served assignment -- in any of the following cases:
 
 * the algorithm is standardized and receives an ordinary code point
   under the registry's normal policy (the entry is removed at the same
